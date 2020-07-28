@@ -1,0 +1,165 @@
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+
+
+
+<style type="text/css">
+header {width:100%; height:130px; background:#9962d0; position:fixed; top:0; left:0; z-index:1000; overflow:hidden; text-align:center;}
+header li {display:inline-block; padding:20px; color:#000;}
+
+#wrap {max-width:1600px; margin:0 auto;width:100%; overflow:hidden;}
+#wrap #bgVideo {width:100%; overflow:hidden; height:900px; position:fixed; top:130px; left:0; z-index:1;}
+#wrap #bgVideo video {width:100%;}
+
+#wrap #section1 {z-index:20;width:100%; overflow:hidden; position:relative;}
+#wrap #section1 ul {position:absolute; bottom:0; left:0; width:100%;}
+#wrap #section1 ul li {float:left; width:25%; opacity:0;}
+#wrap #section1 ul li.box1 > div {background:#ffa9a9;}
+#wrap #section1 ul li.box2 > div {background:#e5a3f1;}
+#wrap #section1 ul li.box3 > div {background:#a4ea94;}
+#wrap #section1 ul li.box4 > div {background:#fbe2aa;}
+#wrap #section1 ul li > div {margin-right:20px; height:400px; text-align:center;}
+#wrap #section1 ul li:last-child > div {margin-right:0;}
+
+
+footer {z-index:20; position:relative; width:100%; height:130px; background:#9962d0;}
+</style>
+
+
+
+
+
+
+
+<header id="header">
+	<ul>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+		<li>s;ls;lsksksksks</li>
+	</ul>
+</header>
+
+
+<div id="wrap">
+	<div id="bgVideo">
+		<video class="videoArea" loop="" muted="" autoplay="">
+			<source src="http://www.acebed.com/video/main0116.mp4" type="video/mp4">
+		</video>
+	</div>
+	<div class="section" id="section1">
+		<ul>
+			<li class="box1">
+				<div>
+					<a href="javascript:;">
+						<p>베스트 & 신메뉴</p>
+						<span>+더보기</span>
+					</a>
+				</div>
+			</li>
+			<li class="box2">
+				<div>
+					<a href="javascript:;">
+						<p>베스트 & 신메뉴</p>
+						<span>+더보기</span>
+					</a>
+				</div>
+			</li>
+			<li class="box3">
+				<div>
+					<a href="javascript:;">
+						<p>베스트 & 신메뉴</p>
+						<span>+더보기</span>
+					</a>
+				</div>
+			</li>
+			<li class="box4">
+				<div>
+					<a href="javascript:;">
+						<p>베스트 & 신메뉴</p>
+						<span>+더보기</span>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<footer>
+	footer
+</footer>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+	
+	//video height
+	var videoH = function(){
+		var winH = $(window).height();
+		$('#section1').css('height',winH);
+	};
+	videoH();
+
+	//scroll event
+	var didScroll;
+	var lastScrollTop = 0;
+	var delta = 5; // 동작의 구현이 시작되는 위치 
+	var secHeight = $('#section1').outerHeight(); // 영향을 받을 요소를 선택
+
+	
+
+
+	$(window).scroll(function(){ 
+		didScroll = true; 
+	});
+
+	setInterval(function(event) { 
+		if (didScroll) { 
+			hasScrolled(); 
+			didScroll = false; 
+		} 
+	}, 250);
+
+	function hasScrolled() {
+		var st = $(this).scrollTop();
+
+		
+		console.log(st)
+
+		// Make sure they scroll more than delta 
+		if(Math.abs(lastScrollTop - st) <= delta) 
+			return;
+
+		
+		if (st > 0){
+			// Scroll Down
+			for (var i=0; i<4; i++ ){
+				$('#section1 li:eq(' + i +')').delay(300*i).animate({opacity:'1'},600,'easeOutQuart');
+			};
+		} else { 
+			// Scroll Up
+			//if(st + $(window).height() < $(document).height()) {
+			
+				for (var i=0; i<4; i++ ){
+					$('#section1 li:eq(' + i +')').delay(100*i).animate({opacity:'0'},400,'easeOutQuart');
+				};
+	
+		}
+
+		lastScrollTop = st;
+
+	}
+
+});
+</script>
